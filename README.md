@@ -1,10 +1,10 @@
-## NumPicker app
+## Cubes
 
 To start the app locally you need to install the dependencies:
 
-git clone https://github.com/197291/picker.git
+git clone https://github.com/197291/cubes.git
 
-cd picker
+cd cubes
 
 npm install
 
