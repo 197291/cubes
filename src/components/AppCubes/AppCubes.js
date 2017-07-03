@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import Paper from 'material-ui/Paper';
+import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import {List, ListItem} from 'material-ui/List';
 
@@ -23,6 +24,9 @@ class AppCubes extends PureComponent {
 
     defaultState = () =>{
        return {
+       	 open:false,
+	       rounds:3,
+	       winner:'',
 	       startGame: false,
 	       displayBtn:false,
 	       srcCubes:[],
@@ -57,8 +61,12 @@ class AppCubes extends PureComponent {
 				nameWinner = item.name;
 			}
 		})
-		console.log(nameWinner);
+
 		this.setState({...firstState});
+		 this.setState({
+			 winner:nameWinner
+		 })
+		 this.handleOpen();
 	}
     
     displayImage = (values) =>{
@@ -107,7 +115,6 @@ class AppCubes extends PureComponent {
         } else{
               index = this.state.step;
         }
-           
             let newTotalScore   = this.state.users[index].totalScore + sum;
             let newStep         = this.state.step + 1;
             let newCurrentScore = this.state.users[index].currentScore.concat([values]);
@@ -123,8 +130,8 @@ class AppCubes extends PureComponent {
                 users: users,
                 step:  newStep
             })
+            
             this.displayImage(values);
-  
     }
 
     handlerClickPlay = () =>{
@@ -140,15 +147,27 @@ class AppCubes extends PureComponent {
     }
 
     handlerClickNext = () =>{
-	    if(this.state.step <= 11){
+    	const lengthGame = (this.state.users.length * this.state.rounds) - 1;
+    	console.log(this.state.users)
+    	console.log(this.state.rounds)
+    	console.log(lengthGame)
+	    if(this.state.step <= lengthGame){
 		    this.generateValueCubes();
 	    } 
     }
+	
+	 handleOpen = () => {
+		this.setState({open: true});
+	}
+	
+	 handleClose = () => {
+		this.setState({open: false});
+	}
 
   render() {
     
-    const userList = this.state.users.map((item, key) =>{
-                   const listItem = item.currentScore.map( (item, key) =>{
+    const userList = this.state.users.map((item, key) =>{ // create list of values fro
+                      const listItem = item.currentScore.map( (item, key) =>{
                       return <ListItem key={key}  primaryText={item.join(" ")}/>
                    })
        
@@ -186,16 +205,22 @@ class AppCubes extends PureComponent {
                  />
                 
               <RaisedButton
-	              ref={(div) => { this.nextButton = div; }}
-	
 	              className={this.state.startGame ? "btn btn-next" : "btn btn-next hidden"}
-               label="Next"
-               onClick={this.handlerClickNext}
+                 label="Next"
+                 onClick={this.handlerClickNext}
                 />
           </div>
           <div className="row-image">
              {listImages}
           </div>
+	      <Dialog
+		      title="Winner"
+		      modal={false}
+		      open={this.state.open}
+		      onRequestClose={this.handleClose}
+	      >
+		      Congratulations {this.state.winner}
+	      </Dialog>
       </Paper>
     );
   }
