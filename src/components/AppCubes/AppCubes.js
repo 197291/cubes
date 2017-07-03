@@ -23,12 +23,9 @@ class AppCubes extends PureComponent {
 
     defaultState = () =>{
        return {
-	       round: [],
 	       startGame: false,
-	       endGame:false,
-	       displayCubes:false,
+	       displayBtn:false,
 	       srcCubes:[],
-	       count:1,
 	       step:0,
 	       users:[
 		       {
@@ -133,27 +130,22 @@ class AppCubes extends PureComponent {
     handlerClickPlay = () =>{
        if(this.state.step === 0) {
 	       this.setState({
-		       startGame: !this.state.startGame
+		       startGame: !this.state.startGame,
+		       displayBtn:true
 	       })
           this.generateValueCubes();
        }  else{
-          this.initiallyState();
+       this.initiallyState();
        }
     }
 
     handlerClickNext = () =>{
-        if(this.state.step < 11){
-        this.generateValueCubes();
-    } else{
-         this.initiallyState();
-    }
+	    if(this.state.step <= 11){
+		    this.generateValueCubes();
+	    } 
     }
 
   render() {
-    
-    const rounds = this.state.round.map((item, key) =>{
-          return <ListItem key={key} primaryText={item}/>
-    });
     
     const userList = this.state.users.map((item, key) =>{
                    const listItem = item.currentScore.map( (item, key) =>{
@@ -194,7 +186,9 @@ class AppCubes extends PureComponent {
                  />
                 
               <RaisedButton
-               className={this.state.startGame ? "btn btn-next" : "btn btn-next hidden"}
+	              ref={(div) => { this.nextButton = div; }}
+	
+	              className={this.state.startGame ? "btn btn-next" : "btn btn-next hidden"}
                label="Next"
                onClick={this.handlerClickNext}
                 />
