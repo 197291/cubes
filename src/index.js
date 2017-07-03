@@ -12,6 +12,9 @@ import App from './containers/App';
 
 import './index.css';
 
+// require('velocity-animate');
+// require('velocity-animate/velocity.ui');
+
 
 injectTapEventPlugin();
 
