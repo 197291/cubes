@@ -1,0 +1,69 @@
+.selected {
+  color: red;
+}
+
+.wrap-players {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch !important;
+  height:100%;
+}
+.players-item {
+  width:20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;;
+  text-align: left;
+}
+
+.wrap-players-item{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.hidden{
+  display: none !important;
+}
+.row-btn{
+  margin-top: 10px;
+  text-align: left;
+}
+.btn{
+  margin:20px;
+}
+.row-total-score{
+  display: flex;
+  justify-content: space-between;
+}
+
+.row-total-score h4{
+  width: 20%;
+}
+
+.custom-input-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 6px 12px;
+}
+
+.row-images{
+  text-align: center;
+  }
+
+.wrap-img{
+  display: inline-block;
+  width:80px;
+  height:80px;
+  overflow: hidden;
+  margin: 15px;
+  }
+.wrap-img img{
+  width:100%;
+  height:100%;
+  }
+
+
+
+
